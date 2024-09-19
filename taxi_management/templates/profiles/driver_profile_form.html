@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Driver Profile{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6 max-w-lg">
+    <h1 class="text-4xl font-bold mb-6 text-gray-800">Create Driver Profile</h1>
+
+    <form method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
+        {% csrf_token %}
+
+        <!-- User Creation Form -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">User Details</h2>
+
+            <!-- Username -->
+            <div class="mb-4">
+                <label for="id_username" class="block text-sm font-medium text-gray-600">Username</label>
+                <input type="text" name="username" id="id_username" value="{{ user_form.username.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.username.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.username.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="id_password1" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" name="password1" id="id_password1" value="{{ user_form.password1.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.password1.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.password1.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label for="id_password2" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                <input type="password" name="password2" id="id_password2" value="{{ user_form.password2.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.password2.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.password2.errors }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Driver Profile Form -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Driver Profile Details</h2>
+
+            <!-- License Number -->
+            <div class="mb-4">
+                <label for="id_license_number" class="block text-sm font-medium text-gray-600">License Number</label>
+                <input type="text" name="license_number" id="id_license_number" value="{{ form.license_number.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.license_number.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.license_number.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Vehicle Type -->
+            <div class="mb-4">
+                <label for="id_vehicle_type" class="block text-sm font-medium text-gray-600">Vehicle Type</label>
+                <input type="text" name="vehicle_type" id="id_vehicle_type" value="{{ form.vehicle_type.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.vehicle_type.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.vehicle_type.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Vehicle Model -->
+            <div class="mb-4">
+                <label for="id_vehicle_model" class="block text-sm font-medium text-gray-600">Vehicle Model</label>
+                <input type="text" name="vehicle_model" id="id_vehicle_model" value="{{ form.vehicle_model.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.vehicle_model.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.vehicle_model.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Vehicle Number -->
+            <div class="mb-4">
+                <label for="id_vehicle_number" class="block text-sm font-medium text-gray-600">Vehicle Number</label>
+                <input type="text" name="vehicle_number" id="id_vehicle_number" value="{{ form.vehicle_number.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.vehicle_number.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.vehicle_number.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Vehicle Image -->
+            <div class="mb-4">
+                <label for="id_vehicle_image" class="block text-sm font-medium text-gray-600">Vehicle Image</label>
+                <input type="file" name="vehicle_image" id="id_vehicle_image" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if form.vehicle_image.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.vehicle_image.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Availability -->
+            <div class="mb-4">
+                <label for="id_is_available" class="block text-sm font-medium text-gray-600">Available</label>
+                <input type="checkbox" name="is_available" id="id_is_available" {% if form.is_available.value %}checked{% endif %} 
+                       class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-4">
+                <label for="id_rating" class="block text-sm font-medium text-gray-600">Rating</label>
+                <input type="number" name="rating" id="id_rating" value="{{ form.rating.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" step="0.1" min="0" max="5">
+                {% if form.rating.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.rating.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Total Rides -->
+            <div class="mb-4">
+                <label for="id_total_rides" class="block text-sm font-medium text-gray-600">Total Rides</label>
+                <input type="number" name="total_rides" id="id_total_rides" value="{{ form.total_rides.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" min="0">
+                {% if form.total_rides.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.total_rides.errors }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <button type="submit" 
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Create Profile
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Passenger Profile{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6 max-w-lg">
+    <h1 class="text-4xl font-bold mb-6 text-gray-800">Create Passenger Profile</h1>
+
+    <form method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
+        {% csrf_token %}
+
+        <!-- User Creation Form -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">User Details</h2>
+
+            <!-- Username -->
+            <div class="mb-4">
+                <label for="id_username" class="block text-sm font-medium text-gray-600">Username</label>
+                <input type="text" name="username" id="id_username" value="{{ user_form.username.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.username.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.username.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="id_password1" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" name="password1" id="id_password1" value="{{ user_form.password1.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.password1.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.password1.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label for="id_password2" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                <input type="password" name="password2" id="id_password2" value="{{ user_form.password2.value }}" 
+                       class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% if user_form.password2.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ user_form.password2.errors }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Passenger Profile Form -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Passenger Profile Details</h2>
+
+            <!-- Preferred Payment Method -->
+            <div class="mb-4">
+                <label for="id_preferred_payment_method" class="block text-sm font-medium text-gray-600">Preferred Payment Method</label>
+                <select name="preferred_payment_method" id="id_preferred_payment_method" 
+                        class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="cash" {% if form.preferred_payment_method.value == 'cash' %}selected{% endif %}>Cash</option>
+                    <option value="card" {% if form.preferred_payment_method.value == 'card' %}selected{% endif %}>Card</option>
+                </select>
+                {% if form.preferred_payment_method.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.preferred_payment_method.errors }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <button type="submit" 
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Create Profile
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

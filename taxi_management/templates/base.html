@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Online Taxi Management{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add other necessary links like favicon, etc. -->
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <header class="bg-blue-500 text-white">
+        <nav class="container mx-auto flex items-center justify-between p-4">
+            <div>
+                <a href="{% url 'dashboard' %}" class="text-2xl font-bold">TaxiApp</a>
+            </div>
+            <div class="space-x-4">
+                <a href="{% url 'dashboard' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Dashboard</a>
+                <a href="{% url 'ride-request-list' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Ride Requests</a>
+                <a href="{% url 'ride-list' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Rides</a>
+
+                {% if user.is_authenticated %}
+                    {% if user.is_driver %}
+                        <a href="{% url 'driver-profile-detail' user.driverprofile.id %}" class="hover:bg-blue-700 px-3 py-2 rounded">Driver Profile</a>
+                        <a href="{% url 'driver-profile-update' user.driverprofile.id %}" class="hover:bg-blue-700 px-3 py-2 rounded">Update Driver Profile</a>
+                    {% elif user.is_passenger %}
+                        <a href="{% url 'passenger-profile-detail' user.passengerprofile.id %}" class="hover:bg-blue-700 px-3 py-2 rounded">Passenger Profile</a>
+                        <a href="{% url 'passenger-profile-update' user.passengerprofile.id %}" class="hover:bg-blue-700 px-3 py-2 rounded">Update Passenger Profile</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Logout</a>
+                    {% else %}
+                    <a href="{% url 'driver-profile-create' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Create Driver Profile</a>
+                    <a href="{% url 'passenger-profile-create' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Create Passenger Profile</a>
+                    <a href="{% url 'login' %}" class="hover:bg-blue-700 px-3 py-2 rounded">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4">
+        {% block content %}
+        <!-- Main content will go here -->
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-4">
+        <p>&copy; {{ current_year }} TaxiApp. All rights reserved.</p>
+    </footer>
+
+    {% block extra_js %}
+    <!-- Additional JavaScript can be included here -->
+    {% endblock %}
+
+</body>
+</html>
