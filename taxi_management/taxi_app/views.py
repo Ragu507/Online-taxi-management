@@ -144,7 +144,7 @@ class DriverProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = DriverProfile
     fields = ['license_number', 'vehicle_type', 'vehicle_model', 'vehicle_number', 'vehicle_image']
     template_name = 'profiles/driver_profile_edit.html'
-    success_url = '/profile/driver/'
+    success_url = reverse_lazy('driver-profile-list')
 
 
 class RideRequestCreateView(LoginRequiredMixin, CreateView):
