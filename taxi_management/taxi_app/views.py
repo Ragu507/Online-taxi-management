@@ -138,7 +138,7 @@ class PassengerProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = PassengerProfile
     fields = ['preferred_payment_method']
     template_name = 'profiles/passenger_profile_edit.html'
-    success_url = '/profile/passenger/'
+    success_url = reverse_lazy('passenger-profile-list')
 
 class DriverProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = DriverProfile
